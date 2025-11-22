@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <body>
+ <script type='text/javascript'>
+      //<![CDATA[
+      var pictureSrc ="https://1.bp.blogspot.com/-CXx9jt2JMRk/Vq-Lh5fm88I/AAAAAAAASwo/XivooDn_oSY/s1600/hoamai.png"; //Link ảnh hoa muốn hiển thị trên web
+      var pictureWidth = 15; //Chiều rộng của hoa mai or đào
+      var pictureHeight = 15; //Chiều cao của hoa mai or đào
+      var numFlakes = 10; //Số bông hoa xuất hiện cùng một lúc trên trang web
+      var downSpeed = 0.01; //Tốc độ rơi của hoa
+      var lrFlakes = 10; //Tốc độ các bông hoa giao động từ bên trai sang bên phải và ngược lại
+      
+      
+      if( typeof( numFlakes ) != 'number' || Math.round( numFlakes ) != numFlakes || numFlakes < 1 ) { numFlakes = 10; }
+      
+      //draw the snowflakes
+      for( var x = 0; x < numFlakes; x++ ) {
+      if( document.layers ) { //releave NS4 bug
+      document.write('<layer id="snFlkDiv'+x+'"><imgsrc="'+pictureSrc+'" height="'+pictureHeight+'"width="'+pictureWidth+'" alt="*" border="0"></layer>');
+      } else {
+      document.write('<div style="position:absolute; z-index:9999;"id="snFlkDiv'+x+'"><img src="'+pictureSrc+'"height="'+pictureHeight+'" width="'+pictureWidth+'" alt="*"border="0"></div>');
+      }
+      }
+      
+      //calculate initial positions (in portions of browser window size)
+      var xcoords = new Array(), ycoords = new Array(), snFlkTemp;
+      for( var x = 0; x < numFlakes; x++ ) {
+      xcoords[x] = ( x + 1 ) / ( numFlakes + 1 );
+      do { snFlkTemp = Math.round( ( numFlakes - 1 ) * Math.random() );
+      } while( typeof( ycoords[snFlkTemp] ) == 'number' );
+      ycoords[snFlkTemp] = x / numFlakes;
+      }
+      
+      //now animate
+      function flakeFall() {
+      if( !getRefToDivNest('snFlkDiv0') ) { return; }
+      var scrWidth = 0, scrHeight = 0, scrollHeight = 0, scrollWidth = 0;
+      //find screen settings for all variations. doing this every time allows for resizing and scrolling
+      if( typeof( window.innerWidth ) == 'number' ) { scrWidth = window.innerWidth; scrHeight = window.innerHeight; } else {
+      if( document.documentElement && (document.documentElement.clientWidth ||document.documentElement.clientHeight ) ) {
+      scrWidth = document.documentElement.clientWidth; scrHeight = document.documentElement.clientHeight; } else {
+      if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+      scrWidth = document.body.clientWidth; scrHeight = document.body.clientHeight; } } }
+      if( typeof( window.pageYOffset ) == 'number' ) { scrollHeight = pageYOffset; scrollWidth = pageXOffset; } else {
+      if( document.body && ( document.body.scrollLeft ||document.body.scrollTop ) ) { scrollHeight = document.body.scrollTop;scrollWidth = document.body.scrollLeft; } else {
+      if(document.documentElement && (document.documentElement.scrollLeft ||document.documentElement.scrollTop ) ) { scrollHeight =document.documentElement.scrollTop; scrollWidth =document.documentElement.scrollLeft; } }
+      }
+      //move the snowflakes to their new position
+      for( var x = 0; x < numFlakes; x++ ) {
+      if( ycoords[x] * scrHeight > scrHeight - pictureHeight ) { ycoords[x] = 0; }
+      var divRef = getRefToDivNest('snFlkDiv'+x); if( !divRef ) { return; }
+      if( divRef.style ) { divRef = divRef.style; } var oPix = document.childNodes ? 'px' : 0;
+      divRef.top = ( Math.round( ycoords[x] * scrHeight ) + scrollHeight ) + oPix;
+      divRef.left = ( Math.round( ( ( xcoords[x] * scrWidth ) - (pictureWidth / 2 ) ) + ( ( scrWidth / ( ( numFlakes + 1 ) * 4 ) ) * (Math.sin( lrFlakes * ycoords[x] ) - Math.sin( 3 * lrFlakes * ycoords[x]) ) ) ) + scrollWidth ) + oPix;
+      ycoords[x] += downSpeed;
+      }
+      }
+      
+      //DHTML handlers
+      function getRefToDivNest(divName) {
+      if( document.layers ) { return document.layers[divName]; } //NS4
+      if( document[divName] ) { return document[divName]; } //NS4 also
+      if( document.getElementById ) { return document.getElementById(divName); } //DOM (IE5+, NS6+, Mozilla0.9+, Opera)
+      if( document.all ) { return document.all[divName]; } //Proprietary DOM - IE4
+      return false;
+      }
+      
+      window.setInterval('flakeFall();',100);
+      //]]>
+      </script>
+  </head>
+  <body> 
+    <audio autoplay>
+      <source src="11.ogg" type="audio/ogg">
+      <source src="11.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio>
+  </body>
+<div class="content">
+</div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta property="og:description" content="Được thiết kế và xây dựng bởi Lu Minh Thong !!">
+  <meta property="og:image" content="https://forum.vietdesigner.net/attachments/oosl1u7-png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="/img/heart.png">
+  <script src="main.js"></script>
+  <title>Đếm Ngày Fa</title>
+</head>
+<body>
+  
+  <h1 class="title">Đếm Ngày FA</h1>
+
+  <div class="box">
+
+    <div class="about">
+      <div class="info">
+          <img src="img/hoa.jpg" class="avatar">
+          <div class="details">
+            <p class="name">Phạm Văn Hòa</p>
+            <p class="born">05.12.2005</p>
+          </div>
+        </div>
+
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Hiển thị địa chỉ IP</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  height: 20vh;
+                  background-color: #f0f0f0;
+              }
+              .container {
+                  background-color: #fff;
+                  padding: 5px;
+                  border-radius: 1px;
+                  box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+              }
+          </style>
+      </head>
+      <body>
+          <div class="container">
+              <p id="address"></p>
+              <p id="address"></p>
+              <h20>Địa chỉ IP của bạn là:</h20>
+              <p id="ip-address">Đang tải...</p>
+              <p20>đã lấy ip và gửi cho chủ wed</p20>
+              <p id="address">tui tra ip này xem bạn ở đâu</p>
+          </div>
+          <script>
+              fetch('https://api.ipify.org?format=json')
+                  .then(response => response.json())
+                  .then(data => {
+                      document.getElementById('ip-address').textContent = data.ip;
+                  })
+                  .catch(error => {
+                      document.getElementById('ip-address').textContent = 'Không thể lấy địa chỉ IP';
+                      console.error('Error fetching IP address:', error);
+                  });
+          </script>
+      </body>
+      </body>
+      </body>
+  
+        <div class="heart-box">
+          <img src="img/hearts.svg" class="heart">
+        </div>
+    </div>
+    </script>
+</body>
+    <div class="time">
+      <h2 class="days"><span>00</span>&nbsp;Ngày FA</h2>
+      <p class="sup-time">
+        <span class="hour">10</span>:<span class="min">20</span>:<span class="second">16</span>
+      </p>
+    </div>
+   
+   
+    <head>
+      <title>Nút bấm chuyển trang web</title>
+      <style>
+          .center-button {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 10vh; /* Chiều cao của phần tử chứa */
+          }
+      </style>
+  </head>
+  <body>
+  
+  <div class="center-button">
+      <button type="button" onclick="window.location.href='https://m.me/683372899'">ấn vào đây giúp hòa hết fa😁</button>
+  </div>
+  
+
+  <head>
+ 
+</body>
+
+
+  </body>
+
+
+  </div>
+
+</body>
+</html>
